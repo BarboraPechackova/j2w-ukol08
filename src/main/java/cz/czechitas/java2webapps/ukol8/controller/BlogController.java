@@ -25,13 +25,15 @@ public class BlogController {
     @GetMapping("/")
     public ModelAndView seznam() {
         return new ModelAndView("seznam")
-                .addObject("seznam", service.findByPublishedBeforeAndPublishedNotNull());
+                .addObject("seznam", service.findByPublishedBeforeAndPublishedNotNullOrderByPublishedDesc());
     }
 
     @GetMapping("/{slug}")
-    public ModelAndView detail (@PathVariable String slug, Pageable pageable) {
+    public ModelAndView detail (@PathVariable String slug) {
+//        System.out.println(slug);
+
         return new ModelAndView("detail")
-                .addObject("seznam", service.singlePost(slug, pageable));
+                .addObject("detail", service.singlePost(slug));
     }
 
 }

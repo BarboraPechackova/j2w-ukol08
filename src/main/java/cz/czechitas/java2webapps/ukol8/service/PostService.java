@@ -22,14 +22,13 @@ public class PostService {
         return postRepository.findAll(page);
     }
 
-    public Page<Post> findByPublishedBeforeAndPublishedNotNull() {
-        LocalDate dateOd = LocalDate.of(1900, 1, 1);
+    public Page<Post> findByPublishedBeforeAndPublishedNotNullOrderByPublishedDesc() {
         LocalDate dateDo = LocalDate.now();
-        return postRepository.findByPublishedBetweenAndPublishedNotNull(dateOd, dateDo, PostRepository.ownPage);
+        return postRepository.findByPublishedBeforeAndPublishedNotNullOrderByPublishedDesc(dateDo, PostRepository.ownPage);
     }
 
-    public Page<Post> singlePost(String slug, Pageable pageable) {
-        return postRepository.findBySlug(slug, pageable);
+    public Post singlePost(String slug) {
+        return postRepository.findPostBySlug(slug);
     }
 }
 
